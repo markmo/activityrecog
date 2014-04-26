@@ -111,7 +111,7 @@ The average of these measures is then aggregated by subject and activity by appl
 
 (The "melt" and "dcast" functions from the Reshape2 R package has been used to aggregate the averages. Column names have been conformed to a standard using lowercase and dot notation.)
 
-## Human Activity Recognition Using Smartphones Input Data Set
+## Input Data Set
 
 Version 1.0  
 Jorge L. Reyes-Ortiz, Davide Anguita, Alessandro Ghio, Luca Oneto.  
