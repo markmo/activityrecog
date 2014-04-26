@@ -3,3 +3,4 @@
 .Rhistory
 .RData
 UCI HAR Dataset
+*.html

@@ -36,8 +36,6 @@ varnames <- gsub("([a-z])([A-Z])", "\\1.\\L\\2", names(measures), perl=TRUE)
 varnames <- sub("()", "", varnames, fixed=TRUE)
 # change hyphens to dots
 varnames <- gsub("-", ".", varnames, fixed=TRUE)
-# change commas used in ranges to hyphens
-varnames <- sub(",", "-", varnames, fixed=TRUE)
 # convert column names to lower case
 names(measures) <- sapply(varnames, tolower)
 
@@ -50,7 +48,9 @@ names(measures)[1:2] <- c("subject", "activity")
 # convert subject values into a factor
 measures$subject <- factor(measures$subject)
 
-######## Method 1 - using Reshape2   ####################
+# order by subject then activity
+measures <- measures[order(measures$subject, measures$activity), ]
+rownames(measures) <- NULL # don't need the old row seq
 
 m <- melt(measures, id=c("subject", "activity"))
 df <- dcast(m, subject + activity ~ variable, mean)
@@ -59,31 +59,3 @@ names(df)[3:length(df)] <- sapply(names(df)[3:length(df)], function (x) paste("a
 
 # write the data frame to a txt file
 write.table(df, file="average_measures_by_subject_and_activity.txt", row.names=FALSE)
-
-
-######## Method 2 - without Reshape2 ####################
-
-# identify the numeric columns
-nums <- sapply(measures, is.numeric)
-
-# split the merged data set by subject and activity
-s <- split(measures[, nums], list(measures$activity, measures$subject))
-
-# create a matrix of the mean values by subject and activity
-mat <- sapply(s, colMeans)
-
-tm <- t(mat)
-# extract the non-numeric subject and activity columns from the row names
-# back into the data set
-tm <- cbind(t(sapply(strsplit(rownames(tm), "\\."), identity))[, 2:1], tm)
-
-# convert the matrix into a data frame
-df2 <- data.frame(tm)
-
-# apply more descriptive column names to subject and activity
-names(df2)[1:2] <- c("subject", "activity")
-# add a prefix to the name of derived columns
-names(df2)[3:length(df2)] <- sapply(names(df2)[3:length(df2)], function (x) paste("avg.", x, sep=""))
-
-# write the data frame to a txt file, first including the row names and header
-write.table(df2, file="average_measures_by_subject_and_activity2.txt", row.names=FALSE)
