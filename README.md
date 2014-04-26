@@ -4,6 +4,8 @@
 
 The run_analysis.R script transforms the 'UCI HAR Dataset' into a tidy data set with the average of selected variables for each subject and activity. The tidy data set uses mean and standard deviation measurements only. The data set is output to a space-separated text file.
 
+Please note that I have interpreted mean frequency ("meanFreq") as included in the set of mean measurements.
+
 ### Usage
 
 The script is dependent on the Reshape2 package. You may need to first install this package:

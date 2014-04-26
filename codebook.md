@@ -1,12 +1,16 @@
 # Activity Recognition from Mobile Sensor Data Code Book
 
-This project uses input data from the Human Activity Recognition Using Smartphones Data Set (UCI HAR Dataset). See a description of the input files below.
+This project uses input data from the Human Activity Recognition Using Smartphones Data Set ('UCI HAR Dataset' from the UCI Machine Learning Repository). See a description of the input files below.
 
 ## Tidy Data Set
 
+180 observations of 79 variables.
+
 The tidy data set includes the average of selected variables for each subject and activity. The tidy data set uses mean and standard deviation measurements only.
 
-The file contains the following columns:
+The file contains the columns below.
+
+The 'subject' and 'activity' columns are factors stored as characters.
 
     subject
         Identifies the subject who performed the activity. Valid range is from 1 to 30.
@@ -22,7 +26,9 @@ Subsequently, the body linear acceleration and angular velocity were derived in 
 Finally a Fast Fourier Transform (FFT) was applied to some of these signals producing f.body.acc.(x|y|z), f.body.acc.jerk.(x|y|z), f.body.gyro.(x|y|z), f.body.acc.jerk.mag, f.body.gyro.mag, f.body.gyro.jerk.mag. (Note the 'f' to indicate frequency domain signals).
 
 These signals were used to estimate variables of the feature vector for each pattern '.(x|y|z)' is used to denote 3-axial signals in the X, Y and Z directions.
-    
+
+The following columns are all numeric.
+
     avg.t.body.acc.mean.x
     avg.t.body.acc.mean.y
     avg.t.body.acc.mean.z
@@ -106,6 +112,99 @@ These signals were used to estimate variables of the feature vector for each pat
 ## Transformations
 
 Only features related to mean, standard deviation ("std"), and mean frequency ("meanFreq") are extracted from the input files after first merging the training and test data sets with their activity labels and subjects.
+
+The format of this intermediate file is as follows.
+
+10,299 observations of 79 variables (including mean, mean frequency, and standard deviation).
+
+The 'subject' and 'activity' columns are factors.
+
+    subject
+        Identifies the subject who performed the activity. Valid range is from 1 to 30.
+    activity
+        Identifies the type of activity performed. Valid values are: WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING.
+
+The following columns are all numeric and have the same definitions before being averaged as in the tidy data set.
+
+    t.body.acc.mean.x
+    t.body.acc.mean.y
+    t.body.acc.mean.z
+    t.body.acc.std.x
+    t.body.acc.std.y
+    t.body.acc.std.z
+    t.gravity.acc.mean.x
+    t.gravity.acc.mean.y
+    t.gravity.acc.mean.z
+    t.gravity.acc.std.x
+    t.gravity.acc.std.y
+    t.gravity.acc.std.z
+    t.body.acc.jerk.mean.x
+    t.body.acc.jerk.mean.y
+    t.body.acc.jerk.mean.z
+    t.body.acc.jerk.std.x
+    t.body.acc.jerk.std.y
+    t.body.acc.jerk.std.z
+    t.body.gyro.mean.x
+    t.body.gyro.mean.y
+    t.body.gyro.mean.z
+    t.body.gyro.std.x
+    t.body.gyro.std.y
+    t.body.gyro.std.z
+    t.body.gyro.jerk.mean.x
+    t.body.gyro.jerk.mean.y
+    t.body.gyro.jerk.mean.z
+    t.body.gyro.jerk.std.x
+    t.body.gyro.jerk.std.y
+    t.body.gyro.jerk.std.z
+    t.body.acc.mag.mean
+    t.body.acc.mag.std
+    t.gravity.acc.mag.mean
+    t.gravity.acc.mag.std
+    t.body.acc.jerk.mag.mean
+    t.body.acc.jerk.mag.std
+    t.body.gyro.mag.mean
+    t.body.gyro.mag.std
+    t.body.gyro.jerk.mag.mean
+    t.body.gyro.jerk.mag.std
+    f.body.acc.mean.x
+    f.body.acc.mean.y
+    f.body.acc.mean.z
+    f.body.acc.std.x
+    f.body.acc.std.y
+    f.body.acc.std.z
+    f.body.acc.mean.freq.x
+    f.body.acc.mean.freq.y
+    f.body.acc.mean.freq.z
+    f.body.acc.jerk.mean.x
+    f.body.acc.jerk.mean.y
+    f.body.acc.jerk.mean.z
+    f.body.acc.jerk.std.x
+    f.body.acc.jerk.std.y
+    f.body.acc.jerk.std.z
+    f.body.acc.jerk.mean.freq.x
+    f.body.acc.jerk.mean.freq.y
+    f.body.acc.jerk.mean.freq.z
+    f.body.gyro.mean.x
+    f.body.gyro.mean.y
+    f.body.gyro.mean.z
+    f.body.gyro.std.x
+    f.body.gyro.std.y
+    f.body.gyro.std.z
+    f.body.gyro.mean.freq.x
+    f.body.gyro.mean.freq.y
+    f.body.gyro.mean.freq.z
+    f.body.acc.mag.mean
+    f.body.acc.mag.std
+    f.body.acc.mag.mean.freq
+    f.body.body.acc.jerk.mag.mean
+    f.body.body.acc.jerk.mag.std
+    f.body.body.acc.jerk.mag.mean.freq
+    f.body.body.gyro.mag.mean
+    f.body.body.gyro.mag.std
+    f.body.body.gyro.mag.mean.freq
+    f.body.body.gyro.jerk.mag.mean
+    f.body.body.gyro.jerk.mag.std
+    f.body.body.gyro.jerk.mag.mean.freq
 
 The average of these measures is then aggregated by subject and activity by applying the R "mean" function.
 

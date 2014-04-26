@@ -4,3 +4,6 @@
 .RData
 UCI HAR Dataset
 *.html
+*.Rproj
+*.txt
+*.csv
