@@ -17,17 +17,7 @@ The 'subject' and 'activity' columns are factors stored as characters.
     activity
         Identifies the type of activity performed. Valid values are: WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING.
     
-The remaining columns are the average of the measurements for the given subject and activity.
-
-The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals t.acc.(x|y|z) and t.gyro.(x|y|z). These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (t.body.acc.(x|y|z) and t.gravity.acc.(x|y|z)) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
-
-Subsequently, the body linear acceleration and angular velocity were derived in time to obtain Jerk signals (t.body.acc.jerk.(x|y|z) and t.body.gyro.jerk.(x|y|z)). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (t.body.acc.mag, t.gravity.acc.mag, t.body.acc.jerk.mag, t.body.gyro.mag, t.body.gyro.jerk.mag).
-
-Finally a Fast Fourier Transform (FFT) was applied to some of these signals producing f.body.acc.(x|y|z), f.body.acc.jerk.(x|y|z), f.body.gyro.(x|y|z), f.body.acc.jerk.mag, f.body.gyro.mag, f.body.gyro.jerk.mag. (Note the 'f' to indicate frequency domain signals).
-
-These signals were used to estimate variables of the feature vector for each pattern '.(x|y|z)' is used to denote 3-axial signals in the X, Y and Z directions.
-
-The following columns are all numeric.
+The remaining columns are the averages of the measurements for the given subject and activity.
 
     avg.t.body.acc.mean.x
     avg.t.body.acc.mean.y
@@ -109,13 +99,21 @@ The following columns are all numeric.
     avg.f.body.body.gyro.jerk.mag.std
     avg.f.body.body.gyro.jerk.mag.mean.freq
 
+The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals t.acc.(x|y|z) and t.gyro.(x|y|z). These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (t.body.acc.(x|y|z) and t.gravity.acc.(x|y|z)) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
+
+Subsequently, the body linear acceleration and angular velocity were derived in time to obtain Jerk signals (t.body.acc.jerk.(x|y|z) and t.body.gyro.jerk.(x|y|z)). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (t.body.acc.mag, t.gravity.acc.mag, t.body.acc.jerk.mag, t.body.gyro.mag, t.body.gyro.jerk.mag).
+
+Finally a Fast Fourier Transform (FFT) was applied to some of these signals producing f.body.acc.(x|y|z), f.body.acc.jerk.(x|y|z), f.body.gyro.(x|y|z), f.body.acc.jerk.mag, f.body.gyro.mag, f.body.gyro.jerk.mag. (Note the 'f' to indicate frequency domain signals).
+
+These signals were used to estimate variables of the feature vector for each pattern '.(x|y|z)' is used to denote 3-axial signals in the X, Y and Z directions.
+
 ## Transformations
 
-Only features related to mean, standard deviation ("std"), and mean frequency ("meanFreq") are extracted from the input files after first merging the training and test data sets with their activity labels and subjects.
+Only features related to mean, standard deviation ("std"), and mean frequency ("meanFreq") are extracted from the input files after first merging the training and test data sets with their activity labels and subjects. The format of this merged file is below.
 
-The format of this intermediate file is as follows.
+The average of these measures is then aggregated by subject and activity by applying the R "mean" function. (The "melt" and "dcast" functions from the Reshape2 R package has been used to aggregate the averages. Column names have been conformed to a standard using lowercase and dot notation.)
 
-10,299 observations of 79 variables (including mean, mean frequency, and standard deviation).
+The merged file contains 10,299 observations of 79 variables (including mean, mean frequency, and standard deviation).
 
 The 'subject' and 'activity' columns are factors.
 
@@ -124,7 +122,7 @@ The 'subject' and 'activity' columns are factors.
     activity
         Identifies the type of activity performed. Valid values are: WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING.
 
-The following columns are all numeric and have the same definitions before being averaged as in the tidy data set.
+The following columns are all numeric and are derived from the same features as in the tidy data set.
 
     t.body.acc.mean.x
     t.body.acc.mean.y
@@ -205,10 +203,6 @@ The following columns are all numeric and have the same definitions before being
     f.body.body.gyro.jerk.mag.mean
     f.body.body.gyro.jerk.mag.std
     f.body.body.gyro.jerk.mag.mean.freq
-
-The average of these measures is then aggregated by subject and activity by applying the R "mean" function.
-
-(The "melt" and "dcast" functions from the Reshape2 R package has been used to aggregate the averages. Column names have been conformed to a standard using lowercase and dot notation.)
 
 ## Input Data Set
 
