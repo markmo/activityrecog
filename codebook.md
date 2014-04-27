@@ -6,7 +6,7 @@ This project uses input data from the Human Activity Recognition Using Smartphon
 
 180 observations of 79 variables.
 
-The tidy data set includes the average of selected variables for each subject and activity. The tidy data set uses mean and standard deviation measurements only.
+The tidy data set includes the average of selected variables for each subject and activity. The tidy data set uses mean and standard deviation measurements only. (Please note that I have interpreted mean frequency ("meanFreq") as included in the set of mean measurements.)
 
 The file contains the columns below.
 
